@@ -1,33 +1,40 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Answer from './Answer';
+import QuizContext from '../context/QuizContext';
 
-export default function Answers(props){
-	return(
-	<>
-	<Answer 
-		letter="a" 
-		answer={props.question.answer_a} 
-		selected={props.currentAnswer === "a"} 
-		handleClick={props.handleClick}
-	/>
-	<Answer 
-		letter="b" 
-		answer={props.question.answer_b} 
-		selected={props.currentAnswer === "b"}
-		handleClick={props.handleClick}
-	/>
-	<Answer 
-		letter="c" 
-		answer={props.question.answer_c} 
-		selected={props.currentAnswer === "c"}
-		handleClick={props.handleClick}
-	/>
-	<Answer 
-		letter="d" 
-		answer={props.question.answer_d} 
-		selected={props.currentAnswer === "d"}
-		handleClick={props.handleClick}
-	/>
-	</>
-	)
+function Answers() {
+    const {state, dispatch} = useContext(QuizContext);
+    const {currentAnswer, currentQuestion, questions} = state;
+    const question = questions[currentQuestion];
+
+    return (
+        <>
+            <Answer
+                letter="a"
+                answer={question.answer_a}
+                dispatch={dispatch}
+                selected={currentAnswer === 'a'}
+            />
+            <Answer
+                letter="b"
+                answer={question.answer_b}
+                dispatch={dispatch}
+                selected={currentAnswer === 'b'}
+            />
+            <Answer
+                letter="c"
+                answer={question.answer_c}
+                dispatch={dispatch}
+                selected={currentAnswer === 'c'}
+            />
+            <Answer
+                letter="d"
+                answer={question.answer_d}
+                dispatch={dispatch}
+                selected={currentAnswer === 'd'}
+            />
+        </>
+    );
 }
+
+export default Answers;
